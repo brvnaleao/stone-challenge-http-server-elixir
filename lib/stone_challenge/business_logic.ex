@@ -10,7 +10,6 @@ defmodule StoneChallenge.BusinessLogic do
     |> clean_values
     |> get_totals(emails)
     |> inspect
-
   end
 
   defp clean_values(items) do
