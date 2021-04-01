@@ -1,9 +1,14 @@
 defmodule StoneChallenge.BusinessLogic do
 
   def init(items, email) do
+    emails =
+      email
+      |> String.split("_")
+      |> Enum.uniq
+
     items
     |> clean_values
-    |> get_totals(String.split(email, "_"))
+    |> get_totals(emails)
     |> Jason.encode!
 
   end
