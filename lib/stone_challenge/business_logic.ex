@@ -17,7 +17,7 @@ defmodule StoneChallenge.BusinessLogic do
       quantity_number = String.to_integer quantity
 
       if amount_number <= 0 or quantity_number <= 0 do
-        raise ArgumentError, message: "Cannot receive quantity or value inferior to 0!"
+        throw "Cannot receive quantity or value inferior to 0!"
       end
       amount_number * quantity_number + acc
     end)
@@ -27,7 +27,7 @@ end
     emails_total = length emails
 
     if emails_total <= 0 do
-      raise ArgumentError, message: "The programm must receive at leat one E-mail!"
+      throw "The programm must receive at leat one E-mail!"
     end
     base_part = div amount, emails_total
     remainder = rem amount, emails_total

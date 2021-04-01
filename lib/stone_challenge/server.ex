@@ -13,8 +13,15 @@ defmodule StoneChallenge.Server do
   get "/:items/:email" do
 
     %{"items" => items, "email" => email} = conn.path_params
-    result = BusinessLogic.init(items, email)
-    send_resp(conn, 200, result)
+
+    try do
+      result = BusinessLogic.init(items, email)
+      send_resp(conn, 200, result)
+
+    catch
+      e -> send_resp(conn, 400, e)
+    end
+
   end
 
   match _ do
