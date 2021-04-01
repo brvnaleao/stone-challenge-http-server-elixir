@@ -51,17 +51,17 @@ end
 
     accumulator = %{new_map: %{}, remainder: rem}
 
-    Enum.reduce(mapped_values, accumulator, fn
-      {email, value}, %{new_map: map_values, remainder: 0} ->
-        incremented_map = Map.put(map_values, email, value)
-        %{new_map: incremented_map, remainder: 0}
-
-      {email, value}, %{new_map: map_values, remainder: rest} ->
-        incremented_map = Map.put(map_values, email, value + 1)
-        %{new_map: incremented_map, remainder: rest - 1}
-
-      end)
+    Enum.reduce(mapped_values, accumulator, &reducing_values/2)
   end
 
+  defp reducing_values({email, value}, %{new_map: map_values, remainder: 0}) do
+    incremented_map = Map.put(map_values, email, value)
+    %{new_map: incremented_map, remainder: 0}
+  end
+
+  defp reducing_values({email, value}, %{new_map: map_values, remainder: rest}) do
+    incremented_map = Map.put(map_values, email, value + 1)
+    %{new_map: incremented_map, remainder: rest - 1}
+  end
 
 end
