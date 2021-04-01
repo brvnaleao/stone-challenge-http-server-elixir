@@ -36,13 +36,13 @@ end
   end
 
   def divide_values_per_person(remainder, base_part, emails) do
-    final_value =
+
     Enum.reduce(emails, %{}, fn email, map ->
       Map.put(map, email, base_part)
     end)
     |> sum_remainder(remainder)
 
-    final_value.new_map
+
   end
 
   defp sum_remainder(mapped_values, 0), do: mapped_values
@@ -50,8 +50,10 @@ end
   defp sum_remainder(mapped_values, rem) do
 
     accumulator = %{new_map: %{}, remainder: rem}
-
+    final_value=
     Enum.reduce(mapped_values, accumulator, &reducing_values/2)
+
+    final_value.new_map
   end
 
   defp reducing_values({email, value}, %{new_map: map_values, remainder: 0}) do
