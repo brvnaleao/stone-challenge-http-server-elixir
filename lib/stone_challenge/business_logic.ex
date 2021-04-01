@@ -9,7 +9,7 @@ defmodule StoneChallenge.BusinessLogic do
     items
     |> clean_values
     |> get_totals(emails)
-    |> Jason.encode!
+    |> inspect
 
   end
 
